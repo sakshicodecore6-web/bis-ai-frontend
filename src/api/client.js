@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://bis-ai-backend.onrender.com',
 });
 
 // Attach the JWT token to every request automatically, if present
