@@ -11,6 +11,7 @@ import CompliancePlanner from './components/CompliancePlanner';
 import ChangeImpact from './components/ChangeImpact';
 import Newsletter from './components/Newsletter';
 import DocumentAuditor from './components/DocumentAuditor';
+import ChatHistorySidebar from './components/ChatHistorySidebar';
 
 function App() {
   const [loginPrompt, setLoginPrompt] = useState({
@@ -20,6 +21,7 @@ function App() {
   });
 
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [chatMessages, setChatMessages] = useState([]);
   const [userEmail, setUserEmail] = useState('');
   const [authMode, setAuthMode] = useState('login'); // 'login' or 'signup'
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -116,6 +118,7 @@ function App() {
     setIsLoggedIn(false);
     setUserEmail('');
     setActiveFeatureId(null);
+    setChatMessages([]);
   };
   return (
     <div
@@ -170,13 +173,22 @@ function App() {
               <Hero />
             </div>
 
-            <div className="landing-chat">
-              <div className="assistant-heading">
-                <span className="assistant-heading__brand">BISync</span>
-              </div>
+            <div className="landing-chat-row">
+  {isLoggedIn && <ChatHistorySidebar messages={chatMessages} />}
 
-              <ChatbotPreview onLockedClick={requestLogin} isLoggedIn={isLoggedIn} />
-            </div>
+  <div className="landing-chat">
+    <div className="assistant-heading">
+      <span className="assistant-heading__brand">BISync</span>
+    </div>
+
+    <ChatbotPreview
+      onLockedClick={requestLogin}
+      isLoggedIn={isLoggedIn}
+      messages={chatMessages}
+      setMessages={setChatMessages}
+    />
+  </div>
+</div>
           </>
         )}
       </aside>

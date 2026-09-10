@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import api from '../api/client';
 
-function ChatbotPreview({ onLockedClick, isLoggedIn = false }) {
+function ChatbotPreview({ onLockedClick, isLoggedIn = false, messages, setMessages }) {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
   const [isThinking, setIsThinking] = useState(false);
   const chatEndRef = useRef(null);
-
+  
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, isThinking]);
