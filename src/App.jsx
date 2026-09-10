@@ -28,6 +28,7 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeFeatureId, setActiveFeatureId] = useState(null);
   const [loginError, setLoginError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const requestLogin = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -313,12 +314,23 @@ function App() {
               />
 
               <label htmlFor="login-password">Password</label>
-              <input
-                id="login-password"
-                type="password"
-                placeholder="Enter your password"
-                required
-              />
+              <div className="login-password-field">
+  <input
+    id="login-password"
+    type={showPassword ? 'text' : 'password'}
+    placeholder="Enter your password"
+    required
+  />
+
+  <button
+    type="button"
+    className="login-password-toggle"
+    onClick={() => setShowPassword((prev) => !prev)}
+    aria-label={showPassword ? 'Hide password' : 'Show password'}
+  >
+    {showPassword ? '🙈' : '👁️'}
+  </button>
+</div>
 
               <button type="submit" className="login-modal__submit">
                 {authMode === 'login' ? 'Log in' : 'Sign up'}
