@@ -2464,3 +2464,43 @@
 .chat-history-sidebar__faq:hover {
   background: var(--parchment-deep);
 }
+/* Password visibility toggle */
+.login-password-field {
+  position: relative;
+  width: 100%;
+}
+
+.login-password-field input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.login-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+.login-password-toggle:hover {
+  opacity: 1;
+}
+
+.login-password-toggle svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
