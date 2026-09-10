@@ -14,7 +14,7 @@ function Hero() {
         <div className="hero__brand-subtitle">
           INTELLIGENT STANDARD<br />
           ASSISTANT
-        </div>git add .
+        </div>
       </div>
 
       <p className="hero__credit">Bureau of Indian Standards</p>
