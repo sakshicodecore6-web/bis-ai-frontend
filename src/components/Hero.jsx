@@ -10,11 +10,11 @@ function Hero() {
       />
 
       <div className="hero__branding">
-        <div className="hero__brand-name">BIS–AI</div>
+        <div className="hero__brand-name">BISync</div>
         <div className="hero__brand-subtitle">
           INTELLIGENT STANDARD<br />
           ASSISTANT
-        </div>
+        </div>git add .
       </div>
 
       <p className="hero__credit">Bureau of Indian Standards</p>
