@@ -563,6 +563,7 @@
 
 .page--logged-in .landing-navbar {
   opacity: 1;
+  position: relative;
   transform: translateY(0);
   z-index: 100;
   transition:
