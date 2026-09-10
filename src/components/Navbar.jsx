@@ -19,7 +19,14 @@ function Navbar({ onLogin, onAddAccount, isLoggedIn, userEmail, onLogout }) {
 
   return (
     <header className="navbar">
-      <div className="navbar__brand">BISync</div>
+      <div className="navbar__brand">
+  <img
+    src="/bisync-brand-icon.svg"
+    alt="BISync"
+    className="navbar__brand-icon"
+  />
+  <span>BISync</span>
+</div>
 
       <div className="navbar__actions">
         <select
