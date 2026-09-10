@@ -1,13 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-<Navbar
-  onLogin={() => {
-    setAuthMode('login');
-    setShowLoginForm(true);
-  }}
-  isLoggedIn={isLoggedIn}
-  userEmail={userEmail}
-  onLogout={handleLogout}
-/>
+
 function Navbar({ onLogin, isLoggedIn, userEmail, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
