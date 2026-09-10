@@ -21,6 +21,7 @@ function App() {
   });
 
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [addingAccount, setAddingAccount] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [userEmail, setUserEmail] = useState('');
   const [authMode, setAuthMode] = useState('login'); // 'login' or 'signup'
@@ -218,9 +219,15 @@ function App() {
         <div className="landing-navbar">
           <Navbar
   onLogin={() => {
-    setAuthMode('login');
-    setShowLoginForm(true);
-  }}
+  setAddingAccount(false);
+  setAuthMode('login');
+  setShowLoginForm(true);
+}}
+onAddAccount={() => {
+  setAddingAccount(true);
+  setAuthMode('login');
+  setShowLoginForm(true);
+}}
   isLoggedIn={isLoggedIn}
   userEmail={userEmail}
   onLogout={handleLogout}
