@@ -21,7 +21,7 @@ function Navbar({ onLogin, onAddAccount, isLoggedIn, userEmail, onLogout }) {
     <header className="navbar">
       <div className="navbar__brand">
   <img
-    src="/bisync-brand-icon.svg"
+    src="/bisync-brand-icon.png"
     alt="BISync"
     className="navbar__brand-icon"
   />
