@@ -46,12 +46,15 @@ function Navbar({ onLogin, isLoggedIn, userEmail, onLogout }) {
               <div className="navbar__profile-menu">
                 <p className="navbar__profile-menu-id">{userEmail}</p>
                 <button
-                  className="navbar__profile-menu-item"
-                  type="button"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Add account
-                </button>
+  className="navbar__profile-menu-item"
+  type="button"
+  onClick={() => {
+    setMenuOpen(false);
+    onLogin();
+  }}
+>
+  Add account
+</button>
                 <button
                   className="navbar__profile-menu-item navbar__profile-menu-item--danger"
                   type="button"
