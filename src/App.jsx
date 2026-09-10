@@ -120,6 +120,9 @@ function App() {
     setActiveFeatureId(null);
     setChatMessages([]);
   };
+  const clearChatHistory = () => {
+    setChatMessages([]);
+  };
   return (
     <div
       className={`page ${isLoggedIn ? 'page--logged-in' : ''} ${
@@ -174,7 +177,9 @@ function App() {
             </div>
 
             <div className="landing-chat-row">
-  {isLoggedIn && <ChatHistorySidebar messages={chatMessages} />}
+  {isLoggedIn && (
+  <ChatHistorySidebar messages={chatMessages} onClear={clearChatHistory} />
+)}  
 
   <div className="landing-chat">
     <div className="assistant-heading">

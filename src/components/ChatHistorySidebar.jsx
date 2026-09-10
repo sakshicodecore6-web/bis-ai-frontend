@@ -1,4 +1,4 @@
-function ChatHistorySidebar({ messages }) {
+function ChatHistorySidebar({ messages, onClear }) {
   const exchanges = [];
   for (let i = 0; i < messages.length; i++) {
     if (messages[i].type === 'user') {
@@ -12,6 +12,19 @@ function ChatHistorySidebar({ messages }) {
 
   return (
     <aside className="chat-history-sidebar">
+      <div className="chat-history-sidebar__header">
+        <span className="chat-history-sidebar__heading">Chat History</span>
+        {exchanges.length > 0 && (
+          <button
+            type="button"
+            className="chat-history-sidebar__clear"
+            onClick={onClear}
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
       <div className="chat-history-sidebar__list">
         {exchanges.length === 0 ? (
           <p className="chat-history-sidebar__empty">

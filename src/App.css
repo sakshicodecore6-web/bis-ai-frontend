@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600&display=swap');
 /* =================================================
-   BIS–AI ASSISTANT — MAIN CHAT HEADING
 ================================================= */
 
 .assistant-heading {
@@ -2367,6 +2366,39 @@
   border-radius: var(--radius-soft);
   background: var(--white);
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(20, 20, 15, 0.06);
+}
+
+.chat-history-sidebar__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid var(--parchment-deep);
+}
+
+.chat-history-sidebar__heading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+}
+
+.chat-history-sidebar__clear {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink);
+  opacity: 0.55;
+  background: transparent;
+  padding: 0.2rem 0.4rem;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.chat-history-sidebar__clear:hover {
+  opacity: 1;
+  color: #b3452c;
 }
 
 .chat-history-sidebar__list {
@@ -2392,6 +2424,11 @@
   font-size: 0.8rem;
   color: var(--ink);
   line-height: 1.4;
+  transition: background 0.15s ease;
+}
+
+.chat-history-sidebar__item:hover {
+  background: var(--parchment-deep);
 }
 
 .chat-history-sidebar__question {
@@ -2412,7 +2449,7 @@
 
 .chat-history-sidebar__faq {
   flex-shrink: 0;
-  padding: 0.75rem;
+  padding: 0.75rem 0.9rem;
   border-top: 1px solid var(--parchment-deep);
   background: var(--parchment);
   color: var(--ink);
