@@ -293,8 +293,12 @@ onAddAccount={() => {
             <p className="login-modal__eyebrow">BISync</p>
 
             <h2 className="login-modal__heading">
-              {authMode === 'login' ? 'Welcome back.' : 'Create your account.'}
-            </h2>
+  {authMode === 'login'
+    ? addingAccount
+      ? 'Add another account.'
+      : 'Welcome back.'
+    : 'Create your account.'}
+</h2>
 
             <p className="login-modal__body">
               {authMode === 'login'
@@ -356,31 +360,33 @@ onAddAccount={() => {
               </button>
             </form>
 
-            <p className="login-modal__switch">
-              {authMode === 'login' ? (
-                <>
-                  Don&apos;t have an account?{' '}
-                  <button
-                    type="button"
-                    className="login-modal__switch-btn"
-                    onClick={switchToSignup}
-                  >
-                    Sign up
-                  </button>
-                </>
-              ) : (
-                <>
-                  Already have an account?{' '}
-                  <button
-                    type="button"
-                    className="login-modal__switch-btn"
-                    onClick={switchToLogin}
-                  >
-                    Log in
-                  </button>
-                </>
-              )}
-            </p>
+           {!addingAccount && (
+  <p className="login-modal__switch">
+    {authMode === 'login' ? (
+      <>
+        Don&apos;t have an account?{' '}
+        <button
+          type="button"
+          className="login-modal__switch-btn"
+          onClick={switchToSignup}
+        >
+          Sign up
+        </button>
+      </>
+    ) : (
+      <>
+        Already have an account?{' '}
+        <button
+          type="button"
+          className="login-modal__switch-btn"
+          onClick={switchToLogin}
+        >
+          Log in
+        </button>
+      </>
+    )}
+  </p>
+)}
           </div>
         </div>
       )}

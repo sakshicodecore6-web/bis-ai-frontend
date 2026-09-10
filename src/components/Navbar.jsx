@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-function Navbar({ onLogin, isLoggedIn, userEmail, onLogout }) {
+function Navbar({ onLogin, onAddAccount, isLoggedIn, userEmail, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -49,9 +49,9 @@ function Navbar({ onLogin, isLoggedIn, userEmail, onLogout }) {
   className="navbar__profile-menu-item"
   type="button"
   onClick={() => {
-    setMenuOpen(false);
-    onLogin();
-  }}
+  setMenuOpen(false);
+  onAddAccount();
+}}
 >
   Add account
 </button>
