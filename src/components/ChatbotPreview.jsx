@@ -57,17 +57,9 @@ function ChatbotPreview({ onLockedClick, isLoggedIn = false }) {
   return (
     <section className="chat-preview" aria-label="BIS-AI Assistant chat preview">
       <div className="chat-preview__window">
-        <div className="chat-preview__bubble chat-preview__bubble--bot">
-          Hi, I'm the BIS-AI Assistant. Ask me which Indian Standard applies
+                <div className="chat-preview__bubble chat-preview__bubble--bot">
+          Hi, I'm the BISync Assistant. Ask me which Indian Standard applies
           to your product, and I'll point you to the right one.
-        </div>
-
-        <div
-          className={`chat-preview__bubble chat-preview__bubble--user ${
-            messages.length > 0 ? 'chat-preview__demo-question--hidden' : ''
-          }`}
-        >
-          Which IS standard applies to packaged drinking water?
         </div>
 
         {messages.map((item, index) => {

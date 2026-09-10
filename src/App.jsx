@@ -20,6 +20,7 @@ function App() {
   });
 
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
   const [authMode, setAuthMode] = useState('login'); // 'login' or 'signup'
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -61,14 +62,15 @@ function App() {
     const password = event.target.elements['login-password'].value;
 
     try {
-      const response = await api.post('/auth/login', { email, password });
-      localStorage.setItem('access_token', response.data.access_token);
+  const response = await api.post('/auth/login', { email, password });
+  localStorage.setItem('access_token', response.data.access_token);
 
-      setShowLoginForm(false);
-      setIsLoggedIn(true);
-    } catch {
-      setLoginError('Incorrect email or password.');
-    }
+  setUserEmail(email);
+  setShowLoginForm(false);
+  setIsLoggedIn(true);
+} catch (error) {
+  setLoginError('Incorrect email or password.');
+}
   };
 
   const handleSignup = async (event) => {
@@ -109,12 +111,18 @@ function App() {
   const closeFeature = () => {
     setActiveFeatureId(null);
   };
-
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    setIsLoggedIn(false);
+    setUserEmail('');
+    setActiveFeatureId(null);
+  };
   return (
     <div
       className={`page ${isLoggedIn ? 'page--logged-in' : ''} ${
         isSidebarOpen ? '' : 'page--sidebar-closed'
       }`}
+      
     >
       {/* =================================================
           LEFT SIDE
@@ -164,8 +172,7 @@ function App() {
 
             <div className="landing-chat">
               <div className="assistant-heading">
-                <span className="assistant-heading__brand">BIS–AI</span>
-                <span className="assistant-heading__title">Assistant</span>
+                <span className="assistant-heading__brand">BISync</span>
               </div>
 
               <ChatbotPreview onLockedClick={requestLogin} isLoggedIn={isLoggedIn} />
@@ -192,12 +199,14 @@ function App() {
         {/* Landing navbar */}
         <div className="landing-navbar">
           <Navbar
-            onLogin={() => {
-              setAuthMode('login');
-              setShowLoginForm(true);
-            }}
-            isLoggedIn={isLoggedIn}
-          />
+  onLogin={() => {
+    setAuthMode('login');
+    setShowLoginForm(true);
+  }}
+  isLoggedIn={isLoggedIn}
+  userEmail={userEmail}
+  onLogout={handleLogout}
+/>
         </div>
 
         {/* Landing intro */}
@@ -256,7 +265,7 @@ function App() {
               ×
             </button>
 
-            <p className="login-modal__eyebrow">BIS-AI Assistant</p>
+            <p className="login-modal__eyebrow">BISync</p>
 
             <h2 className="login-modal__heading">
               {authMode === 'login' ? 'Welcome back.' : 'Create your account.'}

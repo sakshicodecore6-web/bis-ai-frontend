@@ -2293,3 +2293,57 @@
   background: var(--ink);
   color: var(--parchment);
 }
+/* =====================================================
+   NAVBAR — profile dropdown
+===================================================== */
+
+.navbar__profile-wrap {
+  position: relative;
+}
+
+.navbar__profile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: var(--white);
+  border: 1px solid var(--parchment-deep);
+  border-radius: var(--radius-soft);
+  box-shadow: 0 16px 40px rgba(20, 20, 15, 0.15);
+  padding: var(--space-2);
+  z-index: 60;
+  animation: login-modal-in 0.15s ease both;
+}
+
+.navbar__profile-menu-id {
+  padding: 0.4rem 0.6rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--ink);
+  opacity: 0.65;
+  word-break: break-all;
+  border-bottom: 1px solid var(--parchment-deep);
+  margin-bottom: 0.4rem;
+}
+
+.navbar__profile-menu-item {
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.86rem;
+  color: var(--ink);
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.navbar__profile-menu-item:hover {
+  background: var(--parchment);
+}
+
+.navbar__profile-menu-item--danger {
+  color: #b3452c;
+}
+
+.navbar__profile-menu-item--danger:hover {
+  background: rgba(179, 69, 44, 0.08);
+}

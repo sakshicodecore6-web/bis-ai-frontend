@@ -1,7 +1,33 @@
-function Navbar({ onLogin, isLoggedIn }) {
+import { useState, useRef, useEffect } from 'react';
+<Navbar
+  onLogin={() => {
+    setAuthMode('login');
+    setShowLoginForm(true);
+  }}
+  isLoggedIn={isLoggedIn}
+  userEmail={userEmail}
+  onLogout={handleLogout}
+/>
+function Navbar({ onLogin, isLoggedIn, userEmail, onLogout }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const initial = userEmail ? userEmail.charAt(0).toUpperCase() : 'U';
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
+
   return (
     <header className="navbar">
-      <div className="navbar__brand">BIS-AI</div>
+      <div className="navbar__brand">BISync</div>
 
       <div className="navbar__actions">
         <select
@@ -14,23 +40,48 @@ function Navbar({ onLogin, isLoggedIn }) {
         </select>
 
         {isLoggedIn ? (
-  <button
-    className="navbar__profile"
-    type="button"
-    aria-label="Open user profile"
-  >
-    <span className="navbar__profile-avatar">U</span>
-    <span className="navbar__profile-name">User</span>
-  </button>
-) : (
-  <button
-    className="navbar__login"
-    type="button"
-    onClick={onLogin}
-  >
-    Log in
-  </button>
-)}
+          <div className="navbar__profile-wrap" ref={menuRef}>
+            <button
+              className="navbar__profile"
+              type="button"
+              aria-label="Open user profile"
+              onClick={() => setMenuOpen((prev) => !prev)}
+            >
+              <span className="navbar__profile-avatar">{initial}</span>
+            </button>
+
+            {menuOpen && (
+              <div className="navbar__profile-menu">
+                <p className="navbar__profile-menu-id">{userEmail}</p>
+                <button
+                  className="navbar__profile-menu-item"
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Add account
+                </button>
+                <button
+                  className="navbar__profile-menu-item navbar__profile-menu-item--danger"
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onLogout();
+                  }}
+                >
+                  Log out
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button
+            className="navbar__login"
+            type="button"
+            onClick={onLogin}
+          >
+            Log in
+          </button>
+        )}
       </div>
     </header>
   );
