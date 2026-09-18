@@ -1,6 +1,6 @@
 import LabMatcher from './components/LabMatcher';
 import api from './api/client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ChatbotPreview from './components/ChatbotPreview';
@@ -14,6 +14,12 @@ import DocumentAuditor from './components/DocumentAuditor';
 import ChatHistorySidebar from './components/ChatHistorySidebar';
 
 function App() {
+  useEffect(() => {
+  api.get('/health').catch(() => {
+    // Backend may still be waking up; login will retry normally.
+  });
+}, []);
+
   const [loginPrompt, setLoginPrompt] = useState({
     visible: false,
     x: 0,
@@ -29,6 +35,7 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeFeatureId, setActiveFeatureId] = useState(null);
   const [loginError, setLoginError] = useState('');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const requestLogin = (event) => {
@@ -61,20 +68,23 @@ function App() {
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoginError('');
+    setIsLoggingIn(true);
 
     const email = event.target.elements['login-email'].value;
     const password = event.target.elements['login-password'].value;
 
     try {
-  const response = await api.post('/auth/login', { email, password });
-  localStorage.setItem('access_token', response.data.access_token);
+        const response = await api.post('/auth/login', { email, password });
+        localStorage.setItem('access_token', response.data.access_token);
 
-  setUserEmail(email);
-  setShowLoginForm(false);
-  setIsLoggedIn(true);
-} catch (error) {
-  setLoginError('Incorrect email or password.');
-}
+        setUserEmail(email);
+        setShowLoginForm(false);
+        setIsLoggedIn(true);
+      } catch (error) {
+        setLoginError('Incorrect email or password.');
+      } finally {
+        setIsLoggingIn(false);
+      }
   };
 
   const handleSignup = async (event) => {
@@ -355,8 +365,14 @@ onAddAccount={() => {
   </button>
 </div>
 
-              <button type="submit" className="login-modal__submit">
-                {authMode === 'login' ? 'Log in' : 'Sign up'}
+              <button
+                type="submit"
+                className="login-modal__submit"
+                disabled={isLoggingIn}
+              >
+                {authMode === 'login'
+                  ? isLoggingIn ? 'Logging in...' : 'Log in'
+                  : 'Sign up'}
               </button>
             </form>
 
