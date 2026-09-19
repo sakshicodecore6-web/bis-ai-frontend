@@ -12,6 +12,8 @@ import ChangeImpact from './components/ChangeImpact';
 import Newsletter from './components/Newsletter';
 import DocumentAuditor from './components/DocumentAuditor';
 import ChatHistorySidebar from './components/ChatHistorySidebar';
+import Profile from './components/Profile';
+import ProductManager from './components/ProductManager';
 
 function App() {
   useEffect(() => {
@@ -122,6 +124,11 @@ function App() {
   const openFeature = (featureId) => {
     setActiveFeatureId(featureId);
   };
+
+  const openProfile = () => {
+    setActiveFeatureId('profile');
+  };
+
   const closeFeature = () => {
     setActiveFeatureId(null);
   };
@@ -147,7 +154,21 @@ function App() {
       ================================================= */}
 
       <aside className="page__visual">
-        {activeFeatureId === 'compliance-journey' ? (
+       {activeFeatureId === 'profile' ? (
+  <div className="feature-view">
+    <button className="feature-view__back" type="button" onClick={closeFeature}>
+      ← Back to chat
+    </button>
+    <Profile />
+  </div>
+) : activeFeatureId === 'products' ? (
+  <div className="feature-view">
+    <button className="feature-view__back" type="button" onClick={closeFeature}>
+      ← Back to chat
+    </button>
+    <ProductManager />
+  </div>
+) : activeFeatureId === 'compliance-journey' ? (
           <div className="feature-view">
             <button className="feature-view__back" type="button" onClick={closeFeature}>
               ← Back to chat
@@ -240,6 +261,8 @@ onAddAccount={() => {
 }}
   isLoggedIn={isLoggedIn}
   userEmail={userEmail}
+  onProfile={openProfile}
+  onProducts={() => openFeature('products')}
   onLogout={handleLogout}
 />
         </div>

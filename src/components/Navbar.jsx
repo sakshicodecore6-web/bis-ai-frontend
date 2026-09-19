@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 
-function Navbar({ onLogin, onAddAccount, isLoggedIn, userEmail, onLogout }) {
+function Navbar({
+  onLogin,
+  onAddAccount,
+  isLoggedIn,
+  userEmail,
+  onLogout,
+  onProfile,
+  onProducts,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -53,15 +61,37 @@ function Navbar({ onLogin, onAddAccount, isLoggedIn, userEmail, onLogout }) {
               <div className="navbar__profile-menu">
                 <p className="navbar__profile-menu-id">{userEmail}</p>
                 <button
-  className="navbar__profile-menu-item"
-  type="button"
-  onClick={() => {
-  setMenuOpen(false);
-  onAddAccount();
-}}
->
-  Add account
-</button>
+                  className="navbar__profile-menu-item"
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onProfile();
+                  }}
+                >
+                  My Profile
+                </button>
+
+
+                <button
+                  className="navbar__profile-menu-item"
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onProducts();
+                  }}
+                >
+                  My Products
+                </button>
+                <button
+                  className="navbar__profile-menu-item"
+                  type="button"
+                  onClick={() => {
+                  setMenuOpen(false);
+                  onAddAccount();
+                }}
+                >
+                  Add account
+                </button>
                 <button
                   className="navbar__profile-menu-item navbar__profile-menu-item--danger"
                   type="button"
